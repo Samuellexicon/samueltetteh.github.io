@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samuel Adjetey Tetteh — Systems Administrator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-muted: #4a4a6a;
+    --ink-light: #8888aa;
+    --bg: #f7f7fb;
+    --bg-card: #ffffff;
+    --accent: #2d6a4f;
+    --accent-light: #e8f5e9;
+    --accent-mid: #52b788;
+    --gold: #c8963e;
+    --border: #e0e0ee;
+    --radius: 10px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.2; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,247,251,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-name { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--accent); letter-spacing: 0.01em; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--ink-muted); font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero { max-width: 860px; margin: 0 auto; padding: 5rem 2rem 4rem; }
+  .hero-label { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.2rem; }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--ink); margin-bottom: 0.6rem; }
+  .hero-sub { font-size: 1.15rem; color: var(--ink-muted); max-width: 600px; margin-bottom: 2rem; }
+  .hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .hero-meta span { font-size: 0.85rem; color: var(--ink-light); display: flex; align-items: center; gap: 0.3rem; }
+  .hero-cta { display: inline-block; margin-top: 2rem; padding: 0.65rem 1.5rem; background: var(--accent); color: #fff; border-radius: var(--radius); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+  .hero-cta:hover { background: #1b4d38; }
+
+  .mission { background: var(--accent); color: #fff; padding: 2.5rem 2rem; text-align: center; }
+  .mission blockquote { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(1.1rem, 2.5vw, 1.4rem); max-width: 720px; margin: 0 auto; line-height: 1.5; opacity: 0.95; }
+  .mission cite { display: block; font-family: 'Inter', sans-serif; font-style: normal; font-size: 0.8rem; margin-top: 0.75rem; opacity: 0.7; letter-spacing: 0.04em; }
+
+  section { max-width: 860px; margin: 0 auto; padding: 4rem 2rem; }
+  .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; color: var(--accent-mid); text-transform: uppercase; margin-bottom: 0.5rem; }
+  section h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 2rem; color: var(--ink); }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .goal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; border-top: 3px solid var(--accent); }
+  .goal-num { font-size: 0.72rem; font-weight: 600; color: var(--accent-mid); letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase; }
+  .goal-card p { font-size: 0.9rem; color: var(--ink-muted); line-height: 1.6; }
+
+  .skills-outer { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .skills-category { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+  .skills-category h4 { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag { font-size: 0.78rem; padding: 0.25rem 0.65rem; background: var(--accent-light); color: var(--accent); border-radius: 20px; font-weight: 500; }
+  .skill-tag.priority { background: var(--accent); color: #fff; }
+
+  .project-list { display: flex; flex-direction: column; gap: 1.25rem; }
+  .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; }
+  .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); grid-column: 1; }
+  .project-tag { font-size: 0.72rem; font-weight: 600; color: var(--accent); background: var(--accent-light); border-radius: 4px; padding: 0.2rem 0.6rem; height: fit-content; grid-column: 2; grid-row: 1; }
+  .project-card p { font-size: 0.88rem; color: var(--ink-muted); grid-column: 1 / -1; margin-top: 0.4rem; }
+  .project-meta { font-size: 0.78rem; color: var(--ink-light); grid-column: 1 / -1; margin-top: 0.5rem; }
+
+  .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .cert-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .cert-card h4 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+  .cert-card span { font-size: 0.78rem; color: var(--ink-light); }
+  .cert-status { font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; width: fit-content; margin-top: 0.3rem; }
+  .status-done { background: var(--accent-light); color: var(--accent); }
+  .status-progress { background: #fff8e1; color: #c8963e; }
+  .status-prep { background: #f3e5f5; color: #7b1fa2; }
+
+  .principles-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .principle { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; border-left: 4px solid var(--accent-mid); }
+  .principle h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.6rem; }
+  .principle p { font-size: 0.88rem; color: var(--ink-muted); line-height: 1.7; }
+  .scripture { font-style: italic; font-size: 0.82rem; color: var(--accent); margin-top: 0.6rem; }
+
+  .reflection-box { background: var(--accent); color: #fff; border-radius: var(--radius); padding: 2.5rem; }
+  .reflection-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 1rem; opacity: 0.9; }
+  .reflection-box p { font-size: 0.92rem; line-height: 1.8; opacity: 0.88; margin-bottom: 1rem; }
+  .reflection-box p:last-child { margin-bottom: 0; }
+
+  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .exp-item { display: grid; grid-template-columns: 1fr auto; gap: 0.3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .exp-item h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: var(--ink); }
+  .exp-item .org { font-size: 0.85rem; color: var(--accent); font-weight: 500; }
+  .exp-item .date { font-size: 0.78rem; color: var(--ink-light); grid-column: 2; grid-row: 1; text-align: right; }
+  .exp-item ul { font-size: 0.85rem; color: var(--ink-muted); padding-left: 1.1rem; grid-column: 1 / -1; margin-top: 0.5rem; }
+  .exp-item li { margin-bottom: 0.3rem; }
+
+  .contact-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; text-align: center; }
+  .contact-box h2 { margin-bottom: 0.5rem; }
+  .contact-box p { color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link { display: inline-block; padding: 0.6rem 1.2rem; border: 1.5px solid var(--accent); color: var(--accent); border-radius: var(--radius); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+  .contact-link:hover { background: var(--accent); color: #fff; }
+
+  footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--ink-light); border-top: 1px solid var(--border); }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 3rem 1.25rem; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-tag { grid-column: 1; grid-row: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Samuel Adjetey Tetteh</span>
+  <ul class="nav-links">
+    <li><a href="#goals">Goals</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#principles">Principles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-label">IT Capstone Portfolio · IT 497</span>
+  <h1>Samuel Adjetey Tetteh</h1>
+  <p class="hero-sub">Systems Administrator in training. Building cloud infrastructure, Linux systems, and secure networks — grounded in faith and a commitment to serve.</p>
+  <div class="hero-meta">
+    <span>📍 Tema, Greater Accra, Ghana</span>
+    <span>🎓 Ensign College / BYU-Pathway Worldwide</span>
+    <span>☁️ Azure · AWS · Linux</span>
+  </div>
+  <a href="#contact" class="hero-cta">Get in touch</a>
+</div>
+
+<!-- MISSION -->
+<div class="mission">
+  <blockquote>
+    "Leadership is everywhere and always a moral act. The work of a disciple-leader is to generate light and drive out darkness — in the family, in the Church, at work, and in the community."
+    <cite>— Elder Kim B. Clark, Becoming a Disciple-Leader, Ensign College 2020</cite>
+  </blockquote>
+</div>
+
+<hr class="divider">
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="section-label">Course Objectives</div>
+  <h2>SMART Goals for IT 497</h2>
+  <div class="goals-grid">
+    <div class="goal-card">
+      <div class="goal-num">Goal 1</div>
+      <p>Complete a professional portfolio documenting at least three technical competencies — cloud administration, Linux systems, and security monitoring — demonstrating readiness for a systems administration role by the end of IT 497.</p>
+    </div>
+    <div class="goal-card">
+      <div class="goal-num">Goal 2</div>
+      <p>Produce a spiritual progression portfolio containing at least six weekly reflections connecting course principles to growth as a disciple of Christ and a leader, completed by the end of this course.</p>
+    </div>
+    <div class="goal-card">
+      <div class="goal-num">Goal 3</div>
+      <p>Articulate a personal leadership philosophy grounded in disciple-leadership principles that can be confidently presented in any professional or Church setting by the conclusion of IT 497.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Competencies</div>
+  <h2>Skills and Tools</h2>
+  <div class="skills-outer">
+
+    <div class="skills-category">
+      <h4>Cloud and Infrastructure</h4>
+      <div class="skill-tags">
+        <span class="skill-tag priority">Azure Virtual Machines</span>
+        <span class="skill-tag priority">Microsoft Entra ID (Azure AD)</span>
+        <span class="skill-tag priority">Cloud Computing (Azure / AWS)</span>
+        <span class="skill-tag priority">Azure Fundamentals</span>
+        <span class="skill-tag">AWS EC2 · RDS · S3 · WAF</span>
+        <span class="skill-tag">IAM · CloudWatch</span>
+        <span class="skill-tag">AZ-104 (in preparation)</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h4>Systems Administration</h4>
+      <div class="skill-tags">
+        <span class="skill-tag priority">Windows Server Administration</span>
+        <span class="skill-tag priority">Active Directory and Group Policy</span>
+        <span class="skill-tag priority">Microsoft 365 Administration</span>
+        <span class="skill-tag priority">Linux Administration</span>
+        <span class="skill-tag priority">PowerShell Scripting</span>
+        <span class="skill-tag">Virtualization (VMware · Hyper-V · Proxmox)</span>
+        <span class="skill-tag">Backup and Recovery</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h4>Networking and Security</h4>
+      <div class="skill-tags">
+        <span class="skill-tag priority">TCP/IP · DNS · DHCP</span>
+        <span class="skill-tag priority">Network Troubleshooting</span>
+        <span class="skill-tag priority">Cybersecurity Fundamentals</span>
+        <span class="skill-tag priority">Identity and Access Management</span>
+        <span class="skill-tag priority">Security Best Practices</span>
+        <span class="skill-tag">VPN Configuration</span>
+        <span class="skill-tag">Wazuh HIDS · Nmap · SELinux</span>
+        <span class="skill-tag">Wireshark · Packet Filtering</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h4>IT Support</h4>
+      <div class="skill-tags">
+        <span class="skill-tag priority">Help Desk and Technical Support</span>
+        <span class="skill-tag priority">User Account Management</span>
+        <span class="skill-tag priority">Troubleshooting and Root Cause Analysis</span>
+        <span class="skill-tag">Ticketing Systems</span>
+        <span class="skill-tag">Password Resets and Access Control</span>
+        <span class="skill-tag">Remote Desktop Support</span>
+        <span class="skill-tag">Device Configuration</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h4>Database and Scripting</h4>
+      <div class="skill-tags">
+        <span class="skill-tag priority">Database Fundamentals (SQL)</span>
+        <span class="skill-tag">PostgreSQL · JetBrains DataGrip</span>
+        <span class="skill-tag">Bash Scripting</span>
+        <span class="skill-tag">ZFS Storage · LVM</span>
+        <span class="skill-tag">HAProxy · Keepalived</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <h4>Professional Skills</h4>
+      <div class="skill-tags">
+        <span class="skill-tag priority">Problem Solving</span>
+        <span class="skill-tag priority">Documentation</span>
+        <span class="skill-tag priority">Critical Thinking</span>
+        <span class="skill-tag priority">Communication</span>
+        <span class="skill-tag priority">Attention to Detail</span>
+        <span class="skill-tag">Team Collaboration</span>
+        <span class="skill-tag">Time Management</span>
+        <span class="skill-tag">Adaptability</span>
+        <span class="skill-tag">Project Coordination</span>
+      </div>
+    </div>
+
+  </div>
+  <p style="font-size:0.75rem;color:var(--ink-light);margin-top:1rem;">Filled badges indicate highest-demand skills for systems administration roles.</p>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Academic and Professional Work</div>
+  <h2>Key Projects</h2>
+  <div class="project-list">
+
+    <div class="project-card">
+      <h3>Cloud Architecture and Infrastructure Proposals</h3>
+      <span class="project-tag">AWS · Azure</span>
+      <p>Designed a Linux cloud file server on AWS EC2 with LVM storage partitioning, custom security hardening, and file access controls. Architected a SwiftMart Ghana cloud proposal using AWS RDS, S3, and WAF with IAM policies and CloudWatch monitoring. Formulated hybrid cloud proposals for Lexicon IT Solutions and BitBeat Inc. using IaaS concepts, regional availability zones, and fault tolerance. Developed an enterprise infrastructure proposal for FamilySearch Heritage Vault 2.0 integrating HAProxy, Keepalived load balancing, ZFS storage redundancy, SELinux policies, and stateful packet filtering.</p>
+      <div class="project-meta">Skills: AWS EC2 · RDS · S3 · WAF · IAM · HAProxy · ZFS · SELinux · LVM</div>
+    </div>
+
+    <div class="project-card">
+      <h3>Security Monitoring and Network Reconnaissance</h3>
+      <span class="project-tag">Security</span>
+      <p>Configured a Wazuh host intrusion detection system with a central manager and agents across Ubuntu Server and Windows Server virtual machines to analyze real-time event logs, file integrity, and authentication attempts. Executed active network reconnaissance with Nmap across a /20 subnet in Kali Linux. Built virtualized environments across VirtualBox, Proxmox, and AWS EC2 running Ubuntu and Kali nodes to test system policies and user/group access permissions.</p>
+      <div class="project-meta">Skills: Wazuh · Nmap · Kali Linux · VirtualBox · Proxmox · AWS EC2</div>
+    </div>
+
+    <div class="project-card">
+      <h3>Microsoft Azure Administration (IT330)</h3>
+      <span class="project-tag">Azure · AZ-104</span>
+      <p>Completed hands-on AZ-104-aligned labs covering virtual network configuration, virtual machine deployment, Microsoft Entra ID identity management, and role-based access control using both the Azure Portal and Azure CLI.</p>
+      <div class="project-meta">Skills: Azure VNets · VMs · Entra ID · RBAC · Azure CLI</div>
+    </div>
+
+    <div class="project-card">
+      <h3>Database Analytics and Networking Labs</h3>
+      <span class="project-tag">SQL · Networking</span>
+      <p>Constructed entity-relationship diagrams and executed window functions, CTEs, and schema changes in PostgreSQL using JetBrains DataGrip across datasets including JFK Airport Logistics, Lahman Baseball, and the Chinook Media Store. Configured routing and switching topologies in Cisco Packet Tracer and captured live packet traffic with Wireshark for protocol analysis.</p>
+      <div class="project-meta">Skills: PostgreSQL · DataGrip · Cisco Packet Tracer · Wireshark</div>
+    </div>
+
+    <div class="project-card">
+      <h3>Technical Support Engineering / IT Professional Intern — Pasovent</h3>
+      <span class="project-tag">Industry</span>
+      <p>Provided first and second-line technical support for hardware, software, and network issues across a live business environment. Developed a personal ticket triage system that improved response efficiency when managing multiple concurrent client requests. Maintained accurate systems documentation, managed user accounts and access controls, and assisted with network configurations.</p>
+      <div class="project-meta">Tema, Ghana · CAR 398 Internship</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Professional Background</div>
+  <h2>Work Experience</h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <h3>Technical Support Engineering / IT Professional Intern</h3>
+      <span class="org">Pasovent · Tema, Ghana</span>
+      <span class="date">Internship</span>
+      <ul>
+        <li>First and second-line technical support for hardware, software, and network issues</li>
+        <li>Managed user accounts, password resets, and access control in a live environment</li>
+        <li>Developed a personal ticket triage system improving response efficiency across concurrent requests</li>
+        <li>Maintained accurate systems documentation and assisted with network configurations</li>
+        <li>Performed troubleshooting and root cause analysis on hardware and software incidents</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <h3>Area Electrical Maintenance Technician</h3>
+      <span class="org">Volta Aluminium Company Limited · Tema, Ghana</span>
+      <span class="date">2014 — Present</span>
+      <ul>
+        <li>Preventive maintenance on electrical machines and equipment for reliable plant operations</li>
+        <li>Diagnosed and troubleshot electrical machine faults to reduce downtime quickly</li>
+        <li>Read and interpreted electrical blueprints to plan and guide maintenance work</li>
+        <li>Adhered to KPIs focused on improving equipment uptime and production targets</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2>Certifications and Education</h2>
+  <div class="cert-list">
+    <div class="cert-card">
+      <h4>Technical Support Engineer Certificate</h4>
+      <span>Ensign College · CERT-SPEPO</span>
+      <span class="cert-status status-done">Completed</span>
+    </div>
+    <div class="cert-card">
+      <h4>IT Professional Certificate</h4>
+      <span>Ensign College · CERTIFTPO</span>
+      <span class="cert-status status-done">Completed</span>
+    </div>
+    <div class="cert-card">
+      <h4>Certificate of System Administration</h4>
+      <span>Ensign College · CERT-SYSPO</span>
+      <span class="cert-status status-progress">In Progress</span>
+    </div>
+    <div class="cert-card">
+      <h4>AZ-104 Microsoft Azure Administrator</h4>
+      <span>Microsoft Certification</span>
+      <span class="cert-status status-prep">In Preparation</span>
+    </div>
+    <div class="cert-card">
+      <h4>AAS in Information Technology</h4>
+      <span>Ensign College · GPA 3.360</span>
+      <span class="cert-status status-progress">In Progress · 2025–2026</span>
+    </div>
+    <div class="cert-card">
+      <h4>BAS in System Administration</h4>
+      <span>Ensign College · GPA 3.360</span>
+      <span class="cert-status status-progress">Expected Early 2027</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- GUIDING PRINCIPLES -->
+<section id="principles">
+  <div class="section-label">Spiritual Progression Portfolio</div>
+  <h2>Three Guiding Principles</h2>
+  <div class="principles-list">
+    <div class="principle">
+      <h3>Enduring Power through Covenant Keeping and Deep Faith</h3>
+      <p>Lasting power, whether spiritual or professional, comes only through deep and genuine rootedness rather than surface-level preparation. Just as an empty vessel cannot withstand the energy directed at it, shallow technical knowledge and shallow faith will both fail under pressure. Keeping covenants is the channel through which divine power flows into daily decisions and professional work. This principle shapes how I approach every technical challenge: depth is not optional, it is the difference between a system that holds under load and one that fails at the worst possible moment.</p>
+      <div class="scripture">"He is like a man which built a house, and digged deep, and laid the foundation on a rock." — Luke 6:48</div>
+    </div>
+    <div class="principle">
+      <h3>Co-Creation with God through Revelation and Intentional Planning</h3>
+      <p>Effective work begins with spiritual creation before physical execution. The Lord created all things spiritually before they were naturally upon the face of the earth. This pattern is not incidental; it is the Lord's own method. When planning is done in partnership with God — through prayer, scripture study, and seeking personal revelation — it becomes an act of co-creation that aligns our work with His purposes. This principle has reshaped how I approach every significant project, from cloud architecture proposals to this capstone itself.</p>
+      <div class="scripture">"For I, the Lord God, created all things, of which I have spoken, spiritually, before they were naturally upon the face of the earth." — Moses 3:5</div>
+    </div>
+    <div class="principle">
+      <h3>Disciple-Leadership as a Moral and Relational Calling</h3>
+      <p>Leadership in every domain is always a moral act with real consequences for real people. As a future systems administrator, I will hold in my hands the security, reliability, and privacy of the systems that people and organizations depend on. That is not a neutral technical responsibility — it is a moral one. The three questions Elder Clark posed guide every professional role I enter: What is my purpose? How can I lift and strengthen those around me? How can I add value?</p>
+      <div class="scripture">"That which is of God is light; and he that receiveth light, and continueth in God, receiveth more light." — D&C 50:24</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- REFLECTION -->
+<section id="reflection">
+  <div class="section-label">Reflective Activity</div>
+  <h2>Faith and Technology: Personal Reflections</h2>
+  <div class="reflection-box">
+    <h3>On Building Something That Outlasts the Present Moment</h3>
+    <p>During a recent period of quiet reflection and pondering, I found myself thinking about legacy — what am I building, and will it outlast me? In my electrical maintenance work at Volta Aluminium, I maintain systems that keep a major production facility running. If I do my job well, those systems continue to function reliably long after my shift ends. In IT, the same principle applies at a larger scale. The infrastructure I design, the security policies I implement, and the documentation I write will shape the environments that future administrators inherit.</p>
+    <p>The temple, as a place where eternal covenants are made and families are sealed across time, is the ultimate expression of building something that outlasts the present moment. This realization deepened my sense of professional purpose in ways I did not anticipate. The discipline of spiritual and professional growth that this course has cultivated must become self-sustaining after graduation. I cannot take for granted the habits of prayer, study, and covenant keeping that have made this season of growth possible — just as a well-maintained system must be actively monitored and updated rather than left to run without oversight. The integration of my spiritual and professional identities is not a project that ends with this course. It is the ongoing work of a disciple-leader.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <div class="section-label">Get in Touch</div>
+    <h2>Contact</h2>
+    <p>Open to systems administration, cloud infrastructure, and IT roles in Ghana and beyond.</p>
+    <div class="contact-links">
+      <a href="mailto:samuellexicon@outlook.com" class="contact-link">samuellexicon@outlook.com</a>
+      <a href="https://linkedin.com/in/samuel-adjetey-tetteh-a69163322" class="contact-link" target="_blank">LinkedIn</a>
+      <a href="tel:+233204476085" class="contact-link">+233 204 476 085</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Samuel Adjetey Tetteh · IT 497 Capstone Portfolio · Ensign College / BYU-Pathway Worldwide · Tema, Ghana</p>
+</footer>
+
+</body>
+</html>
